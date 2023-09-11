@@ -1,22 +1,19 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil data dari formulir
-    $nama = $_POST["nama"];
-    $folder = $_POST["folder"];
-    $wa = $_POST["wa"];
+    $namaFolder = $_POST["nama_folder"];
     
     // Validasi data sesuai kebutuhan Anda
     
-    // Buat folder baru di /var/www/html
-    $folderPath = "/var/www/html/" . $folder;
-    if (!file_exists($folderPath)) {
-        if (mkdir($folderPath, 0777, true)) {
-            echo "Folder berhasil dibuat!";
-        } else {
-            echo "Gagal membuat folder.";
-        }
+    // Eksekusi perintah sebagai root menggunakan sudo
+    $command = "sudo mkdir /var/www/html/$namaFolder";
+    $output = shell_exec($command);
+    
+    // Cek apakah pembuatan folder berhasil
+    if (is_dir("/var/www/html/$namaFolder")) {
+        echo "Folder berhasil dibuat!";
     } else {
-        echo "Folder sudah ada.";
+        echo "Gagal membuat folder.";
     }
 } else {
     echo "Akses tidak sah.";
