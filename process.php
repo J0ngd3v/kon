@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validasi data sesuai kebutuhan Anda
     
     // Eksekusi perintah sebagai root menggunakan sudo
-    $command = "sudo mkdir /var/www/html/$namaFolder";
+    $command = "mkdir /var/www/html/$namaFolder";
     $output = shell_exec($command);
     
     // Cek apakah pembuatan folder berhasil
