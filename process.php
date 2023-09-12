@@ -1,21 +1,14 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil data dari formulir
-    $namaFolder = $_POST["nama_folder"];
-    
-    // Validasi data sesuai kebutuhan Anda
-    
-    // Eksekusi perintah sebagai root menggunakan sudo
-    $command = "mkdir /var/www/html/$namaFolder";
-    $output = shell_exec($command);
-    
-    // Cek apakah pembuatan folder berhasil
-    if (is_dir("/var/www/html/$namaFolder")) {
-        echo "Folder berhasil dibuat!";
-    } else {
-        echo "Gagal membuat folder.";
-    }
-} else {
-    echo "Akses tidak sah.";
+// Ambil input dari formulir (contoh: $_POST['folder_name'])
+$folderName = $_POST['folder_name'];
+
+// Validasi input: pastikan hanya huruf, angka, dan underscore diperbolehkan
+if (!preg_match('/^[A-Za-z0-9_]+$/', $folderName)) {
+    echo "Nama folder tidak valid. Hanya huruf, angka, dan underscore diperbolehkan.";
+    exit;
 }
+
+// Melakukan eksekusi skrip Bash dengan input yang telah divalidasi
+$output = shell_exec('/var/www/html/newhost.sh ' . escapeshellarg($folderName));
+echo "Hasil eksekusi: $output";
 ?>
